@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import { site, sameAs } from '../../data/site';
+import { projects } from '../../data/projects';
+
+export function getStaticPaths() {
+  return projects.map((p, i) => {
+    const next = projects[(i + 1) % projects.length];
+    return { params: { slug: p.slug }, props: { project: p, next } };
+  });
+}
+
+const { project: p, next } = Astro.props;
+
+const links = [
+  ...(p.url ? [{ label: p.type === 'app' ? 'Launch app' : 'Live demo', href: p.url }] : []),
+  ...(p.repo ? [{ label: 'Source code', href: p.repo }] : []),
+];
+
+const projectSchema = {
+  '@context': 'https://schema.org',
+  '@type': p.type === 'app' ? 'SoftwareApplication' : 'CreativeWork',
+  name: p.title,
+  url: `${site.url}/projects/${p.slug}`,
+  abstract: p.blurb,
+  dateCreated: p.year,
+  ...(p.type === 'app' ? { applicationCategory: p.category } : { genre: p.category }),
+  ...(p.url ? { sameAs: p.url } : {}),
+  author: { '@type': 'Person', name: site.name, url: site.url, sameAs },
+};
+---
+<BaseLayout title={p.title} description={p.blurb}>
+  <JsonLd schema={projectSchema} />
+
+  <div class="fade-up">
+    <article class="mx-auto max-w-[1000px] px-[clamp(22px,5vw,64px)] pb-[clamp(56px,8vw,96px)] pt-[clamp(32px,4vw,52px)]">
+      <a href="/projects" class="mb-[30px] inline-block font-mono text-[12.5px] text-[#6E675B] no-underline transition-colors hover:text-teal">&larr; All projects</a>
+
+      <div class="mb-4 font-mono text-[12px] uppercase tracking-[.12em] text-teal">{p.num} &nbsp;/&nbsp; {p.category}</div>
+      <h1 class="m-0 mb-[18px] font-serif text-[clamp(38px,6vw,68px)] font-medium leading-[1.02] tracking-[-.02em] text-ink">{p.title}</h1>
+      <p class="m-0 mb-9 max-w-[60ch] font-serif text-[clamp(20px,2.4vw,26px)] italic leading-[1.4] text-[#46413A]">{p.blurb}</p>
+
+      <!-- Meta -->
+      <div class="mb-10 flex flex-wrap gap-9 border-y border-[#DED7C9] py-[22px]">
+        <div>
+          <div class="mb-[6px] font-mono text-[11px] uppercase tracking-[.1em] text-[#8C8576]">Year</div>
+          <div class="text-[15.5px] text-ink">{p.year}</div>
+        </div>
+        <div>
+          <div class="mb-[6px] font-mono text-[11px] uppercase tracking-[.1em] text-[#8C8576]">Role</div>
+          <div class="text-[15.5px] text-ink">{p.role}</div>
+        </div>
+        <div>
+          <div class="mb-[6px] font-mono text-[11px] uppercase tracking-[.1em] text-[#8C8576]">Category</div>
+          <div class="text-[15.5px] text-ink">{p.category}</div>
+        </div>
+      </div>
+
+      <!-- Cover -->
+      <div class="mb-12 h-[clamp(180px,30vw,360px)] w-full rounded-[18px] border border-[#DED7C9]" style={`background:${p.cover};`}></div>
+
+      <!-- Body + aside -->
+      <div class="flex flex-wrap items-start gap-[clamp(36px,5vw,64px)]">
+        <div class="min-w-[min(300px,100%)] flex-[1_1_440px]">
+          {p.descParas.map((para) => (
+            <p class="m-0 mb-[22px] text-[17px] leading-[1.68] text-[#3E3933]">{para}</p>
+          ))}
+
+          <h3 class="mb-[18px] mt-9 font-mono text-[12px] uppercase tracking-[.14em] text-teal">Highlights</h3>
+          <ul class="m-0 flex list-none flex-col gap-[14px] p-0">
+            {p.features.map((feat) => (
+              <li class="flex items-start gap-[13px] text-[16px] leading-[1.55] text-[#3E3933]">
+                <span class="mt-[9px] h-[6px] w-[6px] flex-[0_0_auto] rounded-full bg-teal"></span>{feat}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <aside class="sticky top-[90px] flex-[0_0_260px] rounded-2xl border border-[#E6E1D5] bg-white p-[22px] shadow-[0_1px_2px_rgba(28,24,15,.04),0_12px_30px_-18px_rgba(28,24,15,.18)]">
+          {links.length > 0 && (
+            <>
+              <div class="mb-[14px] font-mono text-[11px] uppercase tracking-[.12em] text-[#8C8576]">Links</div>
+              <div class="mb-[22px] flex flex-col gap-[10px]">
+                {links.map((link) => (
+                  <a href={link.href} target="_blank" rel="noopener" class="flex items-center justify-between rounded-[10px] bg-ink px-4 py-3 text-[14px] font-medium text-[#F4F1EA] no-underline transition-colors hover:bg-teal">
+                    {link.label}<span class="font-mono text-[12px]">&#8599;</span>
+                  </a>
+                ))}
+              </div>
+            </>
+          )}
+          <div class="mb-3 font-mono text-[11px] uppercase tracking-[.12em] text-[#8C8576]">Built with</div>
+          <div class="flex flex-wrap gap-[6px]">
+            {p.stack.map((tag) => (
+              <span class="rounded-full border border-[#E4DDCF] px-[9px] py-1 font-mono text-[11px] text-[#6E675B]">{tag}</span>
+            ))}
+          </div>
+        </aside>
+      </div>
+
+      <!-- Next -->
+      <a href={`/projects/${next.slug}`} class="mt-14 flex w-full items-center justify-between gap-5 border-t border-[#DED7C9] pt-[30px] no-underline">
+        <span>
+          <span class="mb-2 block font-mono text-[11px] uppercase tracking-[.12em] text-[#8C8576]">Next project</span>
+          <span class="block font-serif text-[28px] font-medium text-ink">{next.title}</span>
+        </span>
+        <span class="font-serif text-[34px] text-teal">&rarr;</span>
+      </a>
+    </article>
+  </div>
+</BaseLayout>

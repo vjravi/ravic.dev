@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import JsonLd from '../components/JsonLd.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { site } from '../data/site';
+import { projects } from '../data/projects';
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: `Projects — ${site.name}`,
+  itemListElement: projects.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    url: `${site.url}/projects/${p.slug}`,
+    name: p.title,
+  })),
+};
+---
+<BaseLayout
+  title="Projects"
+  description={`Selected work by ${site.name} — speech recognition, generative AI, and applied ML, from production platforms to independent research.`}
+>
+  <JsonLd schema={itemListSchema} />
+
+  <div class="fade-up">
+    <section class="mx-auto max-w-[1180px] px-[clamp(22px,5vw,64px)] py-[clamp(44px,6vw,80px)]">
+      <div class="mb-[14px] flex items-center gap-[9px] font-mono text-[12px] uppercase tracking-[.14em] text-teal">
+        <span class="h-px w-[26px] bg-teal opacity-50"></span>Work
+      </div>
+      <h1 class="m-0 mb-4 font-serif text-[clamp(34px,5vw,56px)] font-medium tracking-[-.015em] text-ink">Projects</h1>
+      <p class="m-0 mb-11 max-w-[56ch] text-[18px] leading-[1.6] text-[#46413A]">
+        A selection of things I&rsquo;ve designed, built, and shipped &mdash; production speech and AI systems, generative prototypes, and independent research. Tap any one for the detail.
+      </p>
+      <div class="grid grid-cols-[repeat(auto-fill,minmax(min(400px,100%),1fr))] gap-5">
+        {projects.map((p) => <ProjectCard project={p} />)}
+      </div>
+    </section>
+  </div>
+</BaseLayout>

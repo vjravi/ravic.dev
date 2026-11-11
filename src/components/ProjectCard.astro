@@ -1,0 +1,28 @@
+---
+import type { Project } from '../data/projects';
+interface Props {
+  project: Project;
+}
+const { project: p } = Astro.props;
+---
+<a
+  href={`/projects/${p.slug}`}
+  class="group flex h-full min-h-[168px] overflow-hidden rounded-[14px] border border-[#E6E1D5] bg-white no-underline shadow-[0_1px_2px_rgba(28,24,15,.04),0_10px_26px_-16px_rgba(28,24,15,.18)] transition-[transform,box-shadow,border-color] duration-300 ease-[cubic-bezier(.2,.7,.3,1)] hover:-translate-y-1 hover:border-[#D6CEBE] hover:shadow-[0_22px_44px_-24px_rgba(28,24,15,.30)]"
+>
+  <div class="relative flex-[0_0_132px] overflow-hidden" style={`background:${p.cover};`}>
+    <span class="absolute left-[10px] top-[10px] rounded-full bg-white/60 px-2 py-1 font-mono text-[9.5px] uppercase tracking-[.08em] text-[rgba(28,24,15,.72)] backdrop-blur-[6px]">
+      {p.category}
+    </span>
+    <span class="absolute -bottom-2 right-2 font-serif text-[58px] font-medium leading-none text-white/50">{p.num}</span>
+  </div>
+  <div class="flex min-w-0 flex-1 flex-col gap-[9px] px-[19px] py-[17px]">
+    <h3 class="m-0 font-serif text-[20px] font-medium leading-[1.12] tracking-[-.01em] text-ink">{p.title}</h3>
+    <p class="m-0 line-clamp-2 text-[13.5px] leading-[1.5] text-[#6E675B]">{p.blurb}</p>
+    <div class="mt-[1px] flex flex-wrap gap-[5px]">
+      {p.stack.slice(0, 3).map((tag) => (
+        <span class="rounded-full border border-[#E7E0D2] px-[7px] py-[3px] font-mono text-[10px] text-[#7A7264]">{tag}</span>
+      ))}
+    </div>
+    <span class="mt-auto pt-[6px] font-mono text-[11.5px] tracking-[.03em] text-teal">View project &rarr;</span>
+  </div>
+</a>

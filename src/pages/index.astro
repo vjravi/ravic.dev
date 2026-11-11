@@ -1,0 +1,144 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import JsonLd from '../components/JsonLd.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { site, sameAs, services } from '../data/site';
+import { projects } from '../data/projects';
+
+const featured = projects.slice(0, 3);
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  url: site.url,
+  jobTitle: 'Freelance AI Engineer & Technical Architect',
+  email: `mailto:${site.email}`,
+  address: { '@type': 'PostalAddress', addressLocality: 'Munich', addressCountry: 'DE' },
+  description: site.description,
+  knowsAbout: [
+    'Automatic Speech Recognition',
+    'Generative AI',
+    'Large Language Models',
+    'Cloud Infrastructure',
+    'Machine Learning',
+    'Technical Architecture',
+  ],
+  seeks: {
+    '@type': 'Demand',
+    name: site.availability.statement,
+  },
+  sameAs,
+};
+---
+<BaseLayout>
+  <JsonLd schema={personSchema} />
+
+  <div class="fade-up">
+    <!-- HERO -->
+    <section class="mx-auto flex max-w-[1180px] flex-wrap items-center gap-[clamp(40px,6vw,72px)] px-[clamp(22px,5vw,64px)] pb-[clamp(40px,6vw,72px)] pt-[clamp(48px,8vw,96px)]">
+      <div class="min-w-[min(300px,100%)] flex-[1_1_380px]">
+        <div class="mb-[22px] flex items-center gap-[9px] font-mono text-[12px] uppercase tracking-[.14em] text-teal">
+          <span class="h-px w-[26px] bg-teal opacity-50"></span>{site.tagline}
+        </div>
+        <h1 class="m-0 mb-[22px] font-serif text-[clamp(34px,5.2vw,60px)] font-medium leading-[1.04] tracking-[-.015em] text-ink">
+          Freelance <span class="italic text-teal">applied AI</span> engineer &mdash; from research to production.
+        </h1>
+        <p class="m-0 mb-4 max-w-[54ch] text-[18px] leading-[1.6] text-[#46413A]">
+          I help companies build and ship speech recognition, generative AI and small-language-model systems &mdash; backed by 10+ years of production ML for global leaders and high-growth startups.
+        </p>
+        <p class="m-0 mb-[30px] max-w-[54ch] text-[18px] leading-[1.6] text-[#46413A]">
+          Based in Munich, working with clients across Europe and remotely. Hands-on engineering plus the architecture and roadmap decisions that decide whether AI ships and sticks.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <a href={`mailto:${site.email}?subject=Project%20enquiry`} class="rounded-full border-none bg-ink px-6 py-[13px] text-[14.5px] font-medium text-[#F4F1EA] no-underline transition-colors hover:bg-teal">Work with me</a>
+          <a href="/projects" class="inline-flex items-center gap-[7px] rounded-full border border-[#C7BCA6] px-[22px] py-3 text-[14.5px] font-medium text-ink no-underline transition-colors hover:border-[#A89C84] hover:bg-black/[.04]">View work</a>
+        </div>
+
+        <!-- Availability -->
+        <div class="mt-[30px] inline-flex items-center gap-2 font-mono text-[12px] text-[#6E675B]">
+          <span class="h-2 w-2 rounded-full bg-[#5C8A52] shadow-[0_0_0_3px_rgba(92,138,82,.18)]"></span>{site.availability.label}
+        </div>
+
+        <!-- Contact links -->
+        <div class="mt-6 flex flex-wrap items-center gap-2">
+          <a href={site.links.linkedin} target="_blank" rel="noopener" class="rounded-full border border-[#C7BCA6] px-4 py-[9px] font-mono text-[13px] text-ink no-underline transition-colors hover:border-[#A89C84] hover:bg-black/[.04]">LinkedIn &#8599;</a>
+          <a href={site.links.github} target="_blank" rel="noopener" class="rounded-full border border-[#C7BCA6] px-4 py-[9px] font-mono text-[13px] text-ink no-underline transition-colors hover:border-[#A89C84] hover:bg-black/[.04]">GitHub &#8599;</a>
+          <a href={`mailto:${site.email}`} class="rounded-full border border-[#C7BCA6] px-4 py-[9px] font-mono text-[13px] text-ink no-underline transition-colors hover:border-[#A89C84] hover:bg-black/[.04]">Email</a>
+        </div>
+      </div>
+
+      <!-- Profile photo -->
+      <div class="relative mx-auto flex-[0_0_auto]">
+        <div class="absolute -bottom-[18px] -right-[18px] left-[18px] top-[18px] rounded-[24px] bg-teal opacity-[.13]"></div>
+        <img
+          src="/profile.png"
+          width="300"
+          height="380"
+          alt={`${site.name} — ${site.role}`}
+          class="relative h-[380px] w-[300px] rounded-[22px] border border-[#DED7C9] object-cover object-top"
+        />
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="border-t border-[#DAD1BD]">
+      <div class="mx-auto max-w-[1180px] px-[clamp(22px,5vw,64px)] py-[clamp(48px,6vw,80px)]">
+        <div class="mb-[14px] flex items-center gap-[9px] font-mono text-[12px] uppercase tracking-[.14em] text-teal">
+          <span class="h-px w-[26px] bg-teal opacity-50"></span>How I can help
+        </div>
+        <h2 class="m-0 mb-[34px] font-serif text-[clamp(26px,3.4vw,38px)] font-medium tracking-[-.01em] text-ink">Freelance services</h2>
+        <div class="grid grid-cols-[repeat(auto-fit,minmax(min(250px,100%),1fr))] gap-5">
+          {services.map((s) => (
+            <div class="rounded-[14px] border border-[#E6E1D5] bg-white p-[22px] shadow-[0_1px_2px_rgba(28,24,15,.04),0_10px_26px_-16px_rgba(28,24,15,.18)]">
+              <h3 class="m-0 mb-[10px] font-serif text-[20px] font-medium text-ink">{s.title}</h3>
+              <p class="m-0 text-[15px] leading-[1.6] text-[#5A5449]">{s.body}</p>
+            </div>
+          ))}
+        </div>
+        <p class="mb-0 mt-8 text-[16px] text-[#46413A]">
+          Have a project in mind? <a href={`mailto:${site.email}?subject=Project%20enquiry`} class="text-teal underline underline-offset-4">{site.email}</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- FEATURED -->
+    <section class="border-t border-[#DAD1BD] bg-[linear-gradient(180deg,#E9E3D2_0%,#DACFB9_100%)]">
+      <div class="mx-auto max-w-[1180px] px-[clamp(22px,5vw,64px)] py-[clamp(48px,6vw,80px)]">
+        <div class="mb-[34px] flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <div class="mb-[14px] flex items-center gap-[9px] font-mono text-[12px] uppercase tracking-[.14em] text-teal">
+              <span class="h-px w-[26px] bg-teal opacity-50"></span>Selected work
+            </div>
+            <h2 class="m-0 font-serif text-[clamp(26px,3.4vw,38px)] font-medium tracking-[-.01em] text-ink">A few things I&rsquo;ve built</h2>
+          </div>
+          <a href="/projects" class="font-mono text-[13px] text-ink no-underline transition-colors hover:text-teal">All projects &rarr;</a>
+        </div>
+        <div class="grid grid-cols-[repeat(auto-fill,minmax(min(400px,100%),1fr))] gap-5">
+          {featured.map((p) => <ProjectCard project={p} />)}
+        </div>
+      </div>
+    </section>
+
+    <!-- WRITING -->
+    <section class="bg-[#173F38]">
+      <div class="mx-auto max-w-[1180px] px-[clamp(22px,5vw,64px)] py-[clamp(54px,7vw,88px)]">
+        <div class="flex flex-wrap items-start gap-10">
+          <div class="min-w-[min(280px,100%)] flex-[1_1_300px]">
+            <div class="mb-[14px] flex items-center gap-[9px] font-mono text-[12px] uppercase tracking-[.14em] text-[#6FD6C7]">
+              <span class="h-px w-[26px] bg-[#6FD6C7] opacity-60"></span>Writing
+            </div>
+            <h2 class="m-0 mb-4 font-serif text-[clamp(26px,3.4vw,38px)] font-medium tracking-[-.01em] text-[#EEF4F1]">Essays &amp; notes</h2>
+            <p class="m-0 mb-6 max-w-[42ch] text-[16.5px] leading-[1.6] text-[#A7C2BB]">
+              On building with speech and language models, AI strategy, and the craft of shipping ML that lasts. Published on Substack.
+            </p>
+            <a href={site.links.substack} target="_blank" rel="noopener" class="inline-flex items-center gap-[7px] rounded-full bg-[#EAF3F0] px-[22px] py-3 text-[14px] font-semibold text-[#0E3C35] no-underline transition-colors hover:bg-white">
+              Read everything on Substack<span class="font-mono text-[11px]">&#8599;</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

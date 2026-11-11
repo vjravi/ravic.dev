@@ -1,0 +1,50 @@
+# Vijay Ravichandran
+
+> Freelance AI engineer & technical architect based in Munich, Germany, with 10+ years building production-grade machine learning systems for global companies and high-growth startups. Expert in speech recognition (ASR), generative AI, small language models, and scalable cloud infrastructure. Available for freelance projects.
+
+## Availability
+
+- **Available for freelance and consulting work** in applied AI, speech technology, and technical architecture.
+- Based in Munich, Germany; works with clients across Europe and remotely.
+- Contact: vijay@ravic.dev
+
+## Services
+
+- Speech & voice AI (ASR, voice interfaces, language modelling)
+- Generative AI & local-first small language models
+- AI strategy & technical architecture
+- Cloud & ML infrastructure (CI/CD, evaluation pipelines)
+
+## Profiles
+
+- Website: https://ravic.dev
+- LinkedIn: https://www.linkedin.com/in/vijay-ravichandran
+- GitHub: https://github.com/vjravi
+- Substack: https://vijayravichandran.substack.com  (TODO: confirm URL)
+
+## Expertise
+
+- Automatic Speech Recognition (ASR), NLP, Language Modeling
+- Large Language Models (BERT, GPT), Small Language Models (SLMs), TTS, Generative AI
+- System design, microservices, CI/CD, Docker, Kubernetes, Terraform
+- Cloud: AWS (EC2, S3, Lambda), Scaleway
+- Languages: Python, Java, C++
+- Leadership: multi-team management, technical roadmap strategy, stakeholder management
+
+## Projects
+
+- **LaLeTu** (/projects/laletu) — Production reading-fluency platform powered by speech recognition; helped thousands of students and won "Startup of the Year, Hessen 2024". Acting CTO / Speech Engineering Lead.
+- **Bixby — German** (/projects/bixby-german) — Trained language models to bring Samsung's Bixby assistant to German, including dialects; built BERT-based usage analysis. Senior Speech Recognition Engineer.
+- **Text-to-Singing** (/projects/text-to-singing) — Generative prototype turning text into melodic vocal performances; became the foundation for a company spin-off. Machine Learning Expert.
+- **AI for Scientific Simulations** (/projects/ai-for-scientific-simulations) — Independent research applying neural networks to scientific simulations to improve researchers' existing models.
+- **Local-First Small Language Models** (/projects/local-first-slms) — Independent research into low-latency SLM architectures for privacy-focused, local-first environments.
+
+## Writing
+
+- Essays and notes on building with speech and language models, AI strategy, and shipping ML — published on Substack (see Profiles).
+
+## Pages
+
+- Home: https://ravic.dev/
+- Projects: https://ravic.dev/projects
+- About: https://ravic.dev/about

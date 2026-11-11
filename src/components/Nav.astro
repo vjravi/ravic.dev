@@ -1,0 +1,40 @@
+---
+import { site } from '../data/site';
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path.startsWith(href);
+
+const items = [
+  { href: '/', label: 'Home' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/about', label: 'About' },
+];
+---
+<header class="sticky top-0 z-50 border-b border-[#E2DCCF] bg-[#EFEDE4]/[.86] backdrop-blur-[14px]">
+  <div class="mx-auto flex max-w-[1180px] items-center justify-between gap-6 px-[clamp(22px,5vw,64px)] py-[15px]">
+    <a href="/" class="font-serif text-[20px] font-semibold tracking-[-.01em] text-ink no-underline">
+      {site.name}<span class="text-teal">.</span>
+    </a>
+    <nav class="flex items-center gap-[2px]">
+      {items.map((item) => (
+        <a
+          href={item.href}
+          class="relative rounded-lg px-[13px] py-2 text-[14.5px] text-[#4A453D] no-underline transition-colors hover:bg-black/5 hover:text-ink"
+        >
+          {item.label}
+          {isActive(item.href) && (
+            <span class="absolute inset-x-[13px] bottom-[1px] h-[2px] rounded-[2px] bg-teal"></span>
+          )}
+        </a>
+      ))}
+      <a
+        href={site.links.substack}
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center gap-[5px] rounded-lg px-[13px] py-2 text-[14.5px] text-[#4A453D] no-underline transition-colors hover:bg-black/5 hover:text-ink"
+      >
+        Writing<span class="font-mono text-[11px] text-teal">&#8599;</span>
+      </a>
+    </nav>
+  </div>
+</header>
