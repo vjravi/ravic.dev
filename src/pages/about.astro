@@ -35,9 +35,8 @@ import { bio, experience, skills } from '../data/about';
             <div class="flex flex-wrap gap-x-8 gap-y-2 border-b border-[#E4DDCF] py-6">
               <div class="flex-[0_0_150px] pt-[5px] font-mono text-[12.5px] text-[#8C8576]">{job.period}</div>
               <div class="min-w-[min(260px,100%)] flex-[1_1_360px]">
-                <div class="mb-[3px] font-serif text-[22px] font-medium text-ink">
-                  {job.role} <span class="text-teal">&middot;</span> <span class="text-[18px] text-[#5A5449]">{job.org}</span>
-                </div>
+                <div class="font-serif text-[22px] font-medium leading-[1.25] text-ink">{job.role}</div>
+                <p class="m-0 mt-[6px] max-w-[60ch] text-[15.5px] leading-[1.5] text-[#6E675B]">{job.org}</p>
               </div>
             </div>
           ))}
