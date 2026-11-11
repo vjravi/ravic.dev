@@ -4,6 +4,9 @@
 export const site = {
   name: 'Vijay Ravichandran',
   initials: 'VR',
+  // Brand wordmark shown in the header: brand + brandTld (= the domain).
+  brand: 'ravic',
+  brandTld: '.dev',
   role: 'Freelance AI Engineer · Technical Architect',
   // Short subtitle used in the hero eyebrow and meta.
   tagline: 'Freelance AI Engineer & Technical Architect',

@@ -12,8 +12,8 @@ const items = [
 ---
 <header id="site-header" class="site-header sticky top-0 z-50 border-b border-[#E2DCCF] bg-[#EFEDE4]/[.86] backdrop-blur-[14px]">
   <div class="mx-auto flex max-w-[1180px] items-center justify-between gap-4 px-[clamp(22px,5vw,64px)] py-[15px]">
-    <a href="/" class="nav-logo font-serif text-[20px] font-semibold tracking-[-.01em] text-ink no-underline">
-      {site.name}<span class="nav-dot text-teal">.</span>
+    <a href="/" aria-label={`${site.brand}${site.brandTld} — ${site.name}, home`} class="nav-logo flex items-baseline font-serif text-[23px] font-semibold leading-none tracking-[-.02em] text-ink no-underline">
+      {site.brand}<span class="nav-dot ml-[1px] font-mono text-[15px] font-medium tracking-normal text-teal">{site.brandTld}</span>
     </a>
     <nav class="flex items-center gap-[2px]">
       {items.map((item) => (
