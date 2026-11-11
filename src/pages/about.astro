@@ -18,8 +18,8 @@ import { bio, experience, skills } from '../data/about';
           <h1 class="m-0 font-serif text-[clamp(34px,5vw,52px)] font-medium leading-[1.05] tracking-[-.015em] text-ink">{site.name}</h1>
         </div>
         <div class="min-w-[min(300px,100%)] flex-[1_1_380px]">
-          {bio.map((para, i) => (
-            <p class={`m-0 mb-[22px] ${i === 0 ? 'text-[19px] leading-[1.62] text-[#3E3933]' : 'text-[17px] leading-[1.66] text-[#46413A]'}`}>{para}</p>
+          {bio.map((para) => (
+            <p class="m-0 mb-[22px] text-[19px] leading-[1.62] text-[#3E3933]">{para}</p>
           ))}
           <div class="mt-2 inline-flex items-center gap-2 font-mono text-[12px] text-[#6E675B]">
             <span class="h-2 w-2 rounded-full bg-[#5C8A52] shadow-[0_0_0_3px_rgba(92,138,82,.18)]"></span>{site.availability.label}
