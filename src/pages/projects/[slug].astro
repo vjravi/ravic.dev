@@ -44,15 +44,15 @@ const projectSchema = {
       <!-- Meta -->
       <div class="mb-10 flex flex-wrap gap-9 border-y border-[#DED7C9] py-[22px]">
         <div>
-          <div class="mb-[6px] font-mono text-[11px] uppercase tracking-[.1em] text-[#8C8576]">Year</div>
+          <div class="mb-[6px] font-mono text-[11px] uppercase tracking-[.1em] text-[#6A6356]">Year</div>
           <div class="text-[15.5px] text-ink">{p.year}</div>
         </div>
         <div>
-          <div class="mb-[6px] font-mono text-[11px] uppercase tracking-[.1em] text-[#8C8576]">Role</div>
+          <div class="mb-[6px] font-mono text-[11px] uppercase tracking-[.1em] text-[#6A6356]">Role</div>
           <div class="text-[15.5px] text-ink">{p.role}</div>
         </div>
         <div>
-          <div class="mb-[6px] font-mono text-[11px] uppercase tracking-[.1em] text-[#8C8576]">Category</div>
+          <div class="mb-[6px] font-mono text-[11px] uppercase tracking-[.1em] text-[#6A6356]">Category</div>
           <div class="text-[15.5px] text-ink">{p.category}</div>
         </div>
       </div>
@@ -80,7 +80,7 @@ const projectSchema = {
         <aside class="sticky top-[90px] flex-[0_0_260px] rounded-2xl border border-[#E6E1D5] bg-white p-[22px] shadow-[0_1px_2px_rgba(28,24,15,.04),0_12px_30px_-18px_rgba(28,24,15,.18)]">
           {links.length > 0 && (
             <>
-              <div class="mb-[14px] font-mono text-[11px] uppercase tracking-[.12em] text-[#8C8576]">Links</div>
+              <div class="mb-[14px] font-mono text-[11px] uppercase tracking-[.12em] text-[#6A6356]">Links</div>
               <div class="mb-[22px] flex flex-col gap-[10px]">
                 {links.map((link) => (
                   <a href={link.href} target="_blank" rel="noopener" class="flex items-center justify-between rounded-[10px] bg-ink px-4 py-3 text-[14px] font-medium text-[#F4F1EA] no-underline transition-colors hover:bg-teal">
@@ -90,7 +90,7 @@ const projectSchema = {
               </div>
             </>
           )}
-          <div class="mb-3 font-mono text-[11px] uppercase tracking-[.12em] text-[#8C8576]">Built with</div>
+          <div class="mb-3 font-mono text-[11px] uppercase tracking-[.12em] text-[#6A6356]">Built with</div>
           <div class="flex flex-wrap gap-[6px]">
             {p.stack.map((tag) => (
               <span class="rounded-full border border-[#E4DDCF] px-[9px] py-1 font-mono text-[11px] text-[#6E675B]">{tag}</span>
@@ -102,7 +102,7 @@ const projectSchema = {
       <!-- Next -->
       <a href={`/projects/${next.slug}`} class="mt-14 flex w-full items-center justify-between gap-5 border-t border-[#DED7C9] pt-[30px] no-underline">
         <span>
-          <span class="mb-2 block font-mono text-[11px] uppercase tracking-[.12em] text-[#8C8576]">Next project</span>
+          <span class="mb-2 block font-mono text-[11px] uppercase tracking-[.12em] text-[#6A6356]">Next project</span>
           <span class="block font-serif text-[28px] font-medium text-ink">{next.title}</span>
         </span>
         <span class="font-serif text-[34px] text-teal">&rarr;</span>

@@ -35,6 +35,13 @@ export const site = {
   },
 } as const;
 
+// Credibility strip under the hero (employers already listed on About).
+export const workedWith = [
+  'Samsung / Harman',
+  'LaLeTu · Startup of the Year, Hessen 2024',
+  'Wallstreetdocs',
+];
+
 // What a client can hire Vijay for. Rendered on Home and in llms.txt.
 export const services = [
   {

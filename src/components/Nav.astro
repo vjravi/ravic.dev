@@ -5,25 +5,25 @@ const isActive = (href: string) =>
   href === '/' ? path === '/' : path.startsWith(href);
 
 const items = [
-  { href: '/', label: 'Home' },
+  { href: '/', label: 'Home', hideOnMobile: true },
   { href: '/projects', label: 'Projects' },
   { href: '/about', label: 'About' },
 ];
 ---
-<header class="sticky top-0 z-50 border-b border-[#E2DCCF] bg-[#EFEDE4]/[.86] backdrop-blur-[14px]">
-  <div class="mx-auto flex max-w-[1180px] items-center justify-between gap-6 px-[clamp(22px,5vw,64px)] py-[15px]">
-    <a href="/" class="font-serif text-[20px] font-semibold tracking-[-.01em] text-ink no-underline">
-      {site.name}<span class="text-teal">.</span>
+<header id="site-header" class="site-header sticky top-0 z-50 border-b border-[#E2DCCF] bg-[#EFEDE4]/[.86] backdrop-blur-[14px]">
+  <div class="mx-auto flex max-w-[1180px] items-center justify-between gap-4 px-[clamp(22px,5vw,64px)] py-[15px]">
+    <a href="/" class="nav-logo font-serif text-[20px] font-semibold tracking-[-.01em] text-ink no-underline">
+      {site.name}<span class="nav-dot text-teal">.</span>
     </a>
     <nav class="flex items-center gap-[2px]">
       {items.map((item) => (
         <a
           href={item.href}
-          class="relative rounded-lg px-[13px] py-2 text-[14.5px] text-[#4A453D] no-underline transition-colors hover:bg-black/5 hover:text-ink"
+          class={`nav-link relative rounded-lg px-[13px] py-2 text-[14.5px] text-[#4A453D] no-underline transition-colors hover:bg-black/5 hover:text-ink ${item.hideOnMobile ? 'hidden sm:inline-block' : ''}`}
         >
           {item.label}
           {isActive(item.href) && (
-            <span class="absolute inset-x-[13px] bottom-[1px] h-[2px] rounded-[2px] bg-teal"></span>
+            <span class="nav-underline absolute inset-x-[13px] bottom-[1px] h-[2px] rounded-[2px] bg-teal"></span>
           )}
         </a>
       ))}
@@ -31,10 +31,43 @@ const items = [
         href={site.links.substack}
         target="_blank"
         rel="noopener"
-        class="inline-flex items-center gap-[5px] rounded-lg px-[13px] py-2 text-[14.5px] text-[#4A453D] no-underline transition-colors hover:bg-black/5 hover:text-ink"
+        class="nav-link hidden items-center gap-[5px] rounded-lg px-[13px] py-2 text-[14.5px] text-[#4A453D] no-underline transition-colors hover:bg-black/5 hover:text-ink sm:inline-flex"
       >
         Writing<span class="font-mono text-[11px] text-teal">&#8599;</span>
+      </a>
+      <a
+        href={`mailto:${site.email}?subject=Project%20enquiry`}
+        class="nav-cta ml-2 rounded-full bg-teal px-[16px] py-[8px] text-[14px] font-semibold text-white no-underline transition-colors hover:bg-ink"
+      >
+        Contact
       </a>
     </nav>
   </div>
 </header>
+
+<style is:global>
+  .site-header { transition: background-color .25s ease, border-color .25s ease, box-shadow .25s ease; }
+  .site-header.is-scrolled {
+    background-color: rgba(18, 46, 41, .94);
+    border-bottom-color: #2F5C52;
+    box-shadow: 0 6px 24px -12px rgba(0, 0, 0, .45);
+  }
+  .site-header.is-scrolled .nav-logo { color: #EEF4F1; }
+  .site-header.is-scrolled .nav-dot { color: #6FD6C7; }
+  .site-header.is-scrolled .nav-link { color: #B6CDC7; }
+  .site-header.is-scrolled .nav-link:hover { background: rgba(255,255,255,.08); color: #fff; }
+  .site-header.is-scrolled .nav-link span.text-teal { color: #6FD6C7; }
+  .site-header.is-scrolled .nav-underline { background: #6FD6C7; }
+  .site-header.is-scrolled .nav-cta { background: #6FD6C7; color: #0E3C35; }
+  .site-header.is-scrolled .nav-cta:hover { background: #fff; }
+</style>
+
+<script is:inline>
+  (function () {
+    var h = document.getElementById('site-header');
+    if (!h) return;
+    function update() { h.classList.toggle('is-scrolled', window.scrollY > 40); }
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+  })();
+</script>
